@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Edit Movie' %}
+
+{% block body %}
+    <section class="example-wrapper">
+        <h1>Edit movie</h1>
+
+        {{ include('movie/_form.html.twig', {buttonName: 'Update'}) }}
+    </section>
+{% endblock %}

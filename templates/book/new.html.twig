@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'New Book' %}
+
+{% block body %}
+    <section class="example-wrapper">
+        <h1>New Book</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Add book</button>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}
