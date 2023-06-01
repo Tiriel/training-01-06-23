@@ -12,6 +12,8 @@ class BookManager
     public function __construct(
         private BookRepository $repository,
         private MailerInterface $mailer,
+        #[Autowire('%env(APP_FOO)%')]
+        private string $foo
     ) {}
 
     public function doSomething()
