@@ -7,6 +7,7 @@ use App\Form\MovieType;
 use App\Movie\MovieProvider;
 use App\Movie\OMDbSearchType;
 use App\Repository\MovieRepository;
+use App\Security\Voter\MovieVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,18 +43,23 @@ class MovieController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_movie_show', requirements: ['id' => '\d+'])]
-    public function show(int $id, MovieRepository $repository): Response
+    public function show(Movie $movie): Response
     {
+        $this->denyAccessUnlessGranted(MovieVoter::VIEW, $movie);
+
         return $this->render('movie/show.html.twig', [
-            'movie' => $repository->find($id),
+            'movie' => $movie,
         ]);
     }
 
     #[Route('/omdb/{title}', name: 'app_movie_omdb', methods: ['GET'])]
     public function omdb(string $title, MovieProvider $provider)
     {
+        $movie = $provider->getMovie(OMDbSearchType::TITLE, $title);
+        $this->denyAccessUnlessGranted(MovieVoter::VIEW, $movie);
+
         return $this->render('movie/show.html.twig', [
-            'movie' => $provider->getMovie(OMDbSearchType::TITLE, $title),
+            'movie' => $movie,
         ]);
     }
 

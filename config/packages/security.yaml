@@ -55,6 +55,7 @@ security:
 #        - { path: ^/$, roles: PUBLIC_ACCESS }
 #        - { path: ^/hello, allow_if: "request.header.get('S-Custom-Header') == 'bar'" }
 #        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin/movie/\d+/edit, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
