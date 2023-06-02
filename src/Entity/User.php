@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $birthday = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $lastConnectedAt = null;
+
     public function __construct()
     {
         $this->movies = new ArrayCollection();
@@ -193,6 +196,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthday(?\DateTimeImmutable $birthday): self
     {
         $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getLastConnectedAt(): ?\DateTimeImmutable
+    {
+        return $this->lastConnectedAt;
+    }
+
+    public function setLastConnectedAt(?\DateTimeImmutable $lastConnectedAt): self
+    {
+        $this->lastConnectedAt = $lastConnectedAt;
 
         return $this;
     }
