@@ -2,6 +2,7 @@
 
 namespace App\Movie;
 
+use App\Movie\Enum\OMDbSearchType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 

@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Movie;
+namespace App\Movie\Provider;
 
 use App\Entity\Movie;
 use App\Entity\User;
+use App\Movie\Enum\OMDbSearchType;
+use App\Movie\OmdbConsumer;
+use App\Movie\Transformers\OmdbMovieTransformer;
 use App\Repository\MovieRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Console\Style\SymfonyStyle;

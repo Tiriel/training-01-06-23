@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Movie;
+namespace App\Movie\Transformers;
 
 use App\Entity\Movie;
 use Symfony\Component\Form\DataTransformerInterface;

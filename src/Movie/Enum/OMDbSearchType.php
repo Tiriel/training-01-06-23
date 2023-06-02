@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Movie;
+namespace App\Movie\Enum;
 
 enum OMDbSearchType: string
 {

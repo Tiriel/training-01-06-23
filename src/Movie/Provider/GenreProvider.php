@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Movie;
+namespace App\Movie\Provider;
 
-use App\Entity\Genre;
+use App\Movie\Transformers\OmdbGenreTransformer;
 use App\Repository\GenreRepository;
 
 class GenreProvider
