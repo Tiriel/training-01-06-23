@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\User;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Security\Voter\BookVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,8 +26,11 @@ class BookController extends AbstractController
     #[Route('/{!id}', name: 'app_book_show', requirements: ['id' => '\d+'], defaults: ['id' => 1], methods: ['GET'])]
     public function show(int $id, BookRepository $repository): Response
     {
+        $book = $repository->find($id);
+        $this->denyAccessUnlessGranted(BookVoter::VIEW, $book);
+
         return $this->render('book/show.html.twig', [
-            'book' => $repository->find($id),
+            'book' => $book,
         ]);
     }
 
@@ -37,6 +42,9 @@ class BookController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (($user = $this->getUser()) instanceof User) {
+                $book->setCreatedBy($user);
+            }
             $repository->save($book, true);
 
             return $this->redirectToRoute('app_book_show', ['id' => $book->getId()]);
